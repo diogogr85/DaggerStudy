@@ -21,13 +21,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 @Module
-public class NetworkModule2 {
+public class NetworkModule {
 
     private static final int CONNECTION_TIMEOUT = 45;
 
     private String baseUrl;
 
-    public NetworkModule2(String baseUrl) {
+    public NetworkModule(String baseUrl) {
         this.baseUrl = baseUrl;
     }
 
