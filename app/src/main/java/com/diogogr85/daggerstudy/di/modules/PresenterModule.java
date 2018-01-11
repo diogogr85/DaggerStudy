@@ -13,7 +13,7 @@ import dagger.Provides;
  * Created by diogoribeiro on 10/01/18.
  */
 
-@Module(includes = NetworkModule2.class)
+@Module(includes = NetworkModule.class)
 public class PresenterModule {
 
     @Provides

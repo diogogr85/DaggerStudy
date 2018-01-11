@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.diogogr85.daggerstudy.DaggerStudyApplication5;
+import com.diogogr85.daggerstudy.DaggerStudyApplication;
 import com.diogogr85.daggerstudy.R;
 import com.diogogr85.daggerstudy.data.model.Film;
 import com.diogogr85.daggerstudy.presenter.MainPresenter;
@@ -24,9 +24,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ((DaggerStudyApplication5) getApplication()).getComponent().inject(this);
-
+        ((DaggerStudyApplication) getApplication()).getComponent().inject(this);
     }
 
     @Override

@@ -1,8 +1,5 @@
 package com.diogogr85.daggerstudy.presenter;
 
-import android.content.Context;
-
-import com.diogogr85.daggerstudy.DaggerStudyApplication5;
 import com.diogogr85.daggerstudy.data.network.NetworkManager;
 
 import java.lang.ref.WeakReference;
