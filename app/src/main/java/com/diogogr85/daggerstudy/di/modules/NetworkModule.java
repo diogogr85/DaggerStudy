@@ -25,10 +25,7 @@ public class NetworkModule {
 
     private static final int CONNECTION_TIMEOUT = 45;
 
-    private String baseUrl;
-
-    public NetworkModule(String baseUrl) {
-        this.baseUrl = baseUrl;
+    public NetworkModule() {
     }
 
     @Provides
@@ -66,7 +63,7 @@ public class NetworkModule {
     @Singleton
     Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl("https://swapi.co/api/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(okHttpClient)
                 .build();
@@ -84,18 +81,5 @@ public class NetworkModule {
     NetworkManager provideNetworkManager(NetworkService networkService) {
         return new NetworkManager(networkService);
     }
-
-//    @Provides
-//    @Singleton
-//    T provideNetworkService(Class<T> klass, Gson gson, OkHttpClient okHttpClient) {
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(baseUrl)
-//                .addConverterFactory(GsonConverterFactory.create(gson))
-//                .client(okHttpClient)
-//                .build();
-//
-//        return retrofit.create(klass);
-//    }
-
 
 }

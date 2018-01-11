@@ -13,35 +13,33 @@ import com.diogogr85.daggerstudy.presenter.contracts.MainContract;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 
-public class MainActivity extends AppCompatActivity implements MainContract.View {
-
-    @Inject
-    MainPresenter mMainPresenter;
+public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ((DaggerStudyApplication) getApplication()).getComponent().inject(this);
+        //        ((DaggerStudyApplication) getApplication()).getComponent().inject(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        if (mMainPresenter != null) {
-            mMainPresenter.bindView(this);
-            mMainPresenter.getFilms();
+        if (mPresenter != null) {
+            mPresenter.bindView(this);
+            mPresenter.getFilms();
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mMainPresenter != null) {
-            mMainPresenter.unbindView();
+        if (mPresenter != null) {
+            mPresenter.unbindView();
         }
     }
 

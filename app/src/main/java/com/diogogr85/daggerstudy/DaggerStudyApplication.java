@@ -1,21 +1,31 @@
 package com.diogogr85.daggerstudy;
 
+import android.app.Activity;
 import android.app.Application;
 
 import com.diogogr85.daggerstudy.di.components.DaggerDaggerStudyComponent;
 import com.diogogr85.daggerstudy.di.components.DaggerStudyComponent;
-import com.diogogr85.daggerstudy.di.modules.NetworkModule;
-import com.diogogr85.daggerstudy.di.modules.PresenterModule;
+
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
 
 
 /**
  * Created by diogoribeiro on 04/01/18.
  */
 
-public class DaggerStudyApplication extends Application {
+public class DaggerStudyApplication extends Application implements HasActivityInjector {
 
     private DaggerStudyComponent mStudyComponent;
     private static DaggerStudyApplication sInstance;
+
+    //java.lang.RuntimeException: Unable to start activity ComponentInfo{com.diogogr85.daggerstudy/com.diogogr85.daggerstudy.view.MainActivity}: java.lang.RuntimeException: com.diogogr85.daggerstudy.DaggerStudyApplication does not implement dagger.android.HasActivityInjector
+    @Inject
+    DispatchingAndroidInjector<Activity> dispatchingActivityInjector;
+
 
     @Override
     public void onCreate() {
@@ -23,9 +33,10 @@ public class DaggerStudyApplication extends Application {
         sInstance = this;
 
        mStudyComponent = DaggerDaggerStudyComponent.builder()
-                .networkModule(new NetworkModule("https://swapi.co/api/"))
-                .presenterModule(new PresenterModule())
-                .build();
+               .application(this)
+               .build();
+
+       mStudyComponent.inject(this);
 
     }
 
@@ -37,4 +48,8 @@ public class DaggerStudyApplication extends Application {
         return mStudyComponent;
     }
 
+    @Override
+    public AndroidInjector<Activity> activityInjector() {
+        return dispatchingActivityInjector;
+    }
 }

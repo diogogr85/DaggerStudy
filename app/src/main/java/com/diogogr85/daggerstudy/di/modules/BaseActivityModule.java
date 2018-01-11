@@ -2,6 +2,8 @@ package com.diogogr85.daggerstudy.di.modules;
 
 import com.diogogr85.daggerstudy.data.network.NetworkManager;
 import com.diogogr85.daggerstudy.presenter.MainPresenter;
+import com.diogogr85.daggerstudy.presenter.contracts.MainContract;
+import com.diogogr85.daggerstudy.view.MainActivity;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -14,11 +16,10 @@ import dagger.Provides;
  */
 
 @Module(includes = NetworkModule.class)
-public class PresenterModule {
+public class BaseActivityModule {
 
     @Provides
-    @Singleton
-    MainPresenter provideMainPresenter(@Named("NetworkManager")NetworkManager networkManager) {
+    MainContract.Presenter provideMainPresenter(@Named("NetworkManager") NetworkManager networkManager) {
         return new MainPresenter(networkManager);
     }
 
